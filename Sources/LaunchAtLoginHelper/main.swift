@@ -12,11 +12,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 			NSApp.terminate(nil)
 			return
 		}
+		
+		DistributedNotificationCenter.default().addObserver(self,
+															selector: #selector(killApp),
+															name: NSNotification.Name("terminateHelper"),
+															object: mainBundleIdentifier)
 
 		let pathComponents = (Bundle.main.bundlePath as NSString).pathComponents
 		let mainPath = NSString.path(withComponents: Array(pathComponents[0...(pathComponents.count - 5)]))
-        UserDefaults(suiteName: "Z74D5LGYDM.com.neonetworks.launchatlogin")!.set(true, forKey: "didLaunchAtLogin")
 		NSWorkspace.shared.launchApplication(mainPath)
+	}
+	
+	@objc func killApp() {
 		NSApp.terminate(nil)
 	}
 }
