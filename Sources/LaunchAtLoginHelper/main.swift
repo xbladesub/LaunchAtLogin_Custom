@@ -15,6 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 		let pathComponents = (Bundle.main.bundlePath as NSString).pathComponents
 		let mainPath = NSString.path(withComponents: Array(pathComponents[0...(pathComponents.count - 5)]))
+        UserDefaults(suiteName: "Z74D5LGYDM.com.neonetworks.launchatlogin")!.set(true, forKey: "didLaunchAtLogin")
 		NSWorkspace.shared.launchApplication(mainPath)
 		NSApp.terminate(nil)
 	}
